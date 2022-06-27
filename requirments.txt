@@ -1,0 +1,10 @@
+absl-py                 0.7.1
+torch                   1.9.0+cu111
+torchaudio              0.9.0
+torchmetrics            0.5.0
+torchvision             0.10.0+cu111
+tensorflow              1.14.0
+tensorflow-estimator    1.14.0
+biopython               1.73
+numpy                   1.18.3
+scikit-learn            0.24.1
