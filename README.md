@@ -28,10 +28,20 @@ All the testing data for evaluation are provided as below:
 
 ## Training
 ```bash
-python MSA_transformer2_train.py --model_num 1 --N 6 --max_positions 1500  --BATCH_SIZE 5
+python MSA_transformer2_train.py --model_num 1 --N 6 --max_positions 1500  --BATCH_SIZE 5 --data_dir <train> --dataset <custom>
 
 model_num: training list model
 N: number of attention layers
 max_positions: maxium number of sequences allowed in the input MSA
 BATCH_SIZE: batch size
+data_dir: folder path for storing data
+dataset: training set name
+```
+
+## Inference
+```bash
+python MSA_transformer2_predict.py --data_dir <test> --dataset <CASP13>
+
+data_dir: folder path for storing data
+dataset: testing set name
 ```
