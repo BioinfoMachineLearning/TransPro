@@ -26,3 +26,12 @@ All the testing data for evaluation are provided as below:
 * CASP test set
 * CAMEO test set
 
+## Training
+```bash
+python MSA_transformer2_train.py --model_num 1 --N 6 --max_positions 1500  --BATCH_SIZE 5
+
+model_num: training list model
+N: # of attention layers
+max_positions: maxium number of sequences allowed in the input MSA
+BATCH_SIZE: batch size
+```
