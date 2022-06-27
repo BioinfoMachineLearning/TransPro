@@ -10,6 +10,17 @@
 1D transformer for predicting protein structural features (secondary structure)
 
 
+## Installation
+```bash
+git clone https://github.com/BioinfoMachineLearning/TransPro.git
+cd TransPro
+mkdir env
+python3.6 -m venv env/ss_virenv
+source env/ss_virenv/bin/activate
+pip install --upgrade pip
+pip install -r requirments.txt
+```
+
 ## Training data
 The training protein targets were extracted from the Protein Data Bank(PDB) before May 2019 with the the sequence identity < 90%. The sequence length range: [50, 500]
 
