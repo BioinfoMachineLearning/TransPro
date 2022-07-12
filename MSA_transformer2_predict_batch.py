@@ -39,11 +39,6 @@ def read_msa(filename: str, nseq: int) -> List[Tuple[str, str]]:
     return [(record.description, remove_insertions(str(record.seq)))
             for record in itertools.islice(SeqIO.parse(filename, "fasta"), nseq)]
 
-# def read_msa(filename: str) -> List[Tuple[str, str]]:
-    # """ Reads the first nseq sequences from an MSA file, automatically removes insertions."""
-    # return [(record.description, remove_insertions(str(record.seq)))
-            # for record in SeqIO.parse(filename, "fasta")]
-
 def read_label(filename: str):
     label = np.load(filename)
     return label
