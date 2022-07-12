@@ -49,7 +49,12 @@ dataset: training set name
 ```
 ## Inference
 ```bash
-python MSA_transformer2_predict.py --data_dir <test> --dataset <CASP13>
+
+**Predict multiple targets in one time:**
+python MSA_transformer2_predict_batch.py --data_dir <test> --dataset <casp13>
+
+If you want to predict multiple targets, you can create a test.lst file under the path /data_dir/dataset/test.lst in the format: <target_id> length
+e.g test/casp13/test.lst
 
 data_dir: folder path for storing data
 dataset: testing set name
