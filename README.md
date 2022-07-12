@@ -48,8 +48,13 @@ data_dir: folder path for storing data
 dataset: training set name
 ```
 ## Inference
+**Predicting with the single a3m file as the input:**
+```bash
+python MSA_transformer2_predict_batch.py -i <a3m_file>
+e.g. python MSA_transformer2_predict_batch.py -i T1026.a3m
+```
 
-**Predict multiple targets in one time:**
+**Predicting multiple targets in one time:**
 ```bash
 python MSA_transformer2_predict_batch.py --data_dir <test> --dataset <casp13>
 
