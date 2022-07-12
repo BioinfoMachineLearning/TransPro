@@ -43,7 +43,7 @@ python MSA_transformer2_train.py --model_num 1 --N 6 --max_positions 1500  --BAT
 
 model_num: training list model
 N: number of attention layers
-max_positions: maxium number of sequences allowed in the input MSA
+max_positions: maximum number of sequences allowed in the input MSA
 BATCH_SIZE: batch size
 data_dir: folder path for storing data
 dataset: training set name
