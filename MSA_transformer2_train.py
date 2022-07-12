@@ -56,12 +56,9 @@ def rebatch(b,pad_idx = 1,max_positions=500):
     for t in list(b):
         if not os.path.exists(train_dir+"/a3m/"+t+".a3m"):
             continue
-        if not os.path.exists(train_dir+"/phi_psi/"+t+".npy"):
-            continue
         if not os.path.exists(train_dir+"/ss/ss_3/"+t+".npy"):
             continue
         train_msa.append(read_msa(train_dir+"/a3m/"+t+".a3m",max_positions))
-        tor_label.append(read_label(train_dir+"/phi_psi/"+t+".npy"))
         ss_label.append(read_label(train_dir+"/ss/ss_3/"+t+".npy"))
     #- . <cls> <eos> <mask> <null_1> <pad> <unk> A B C D E F G H I K L M N O P Q R S T U V W X Y Z
     #30 29 0 2 32 31 1 3 5 25 23 13 9 18 6 21 12 15 4 20 17 28 14 16 10 8 11 26 7 22 24 19 27
@@ -105,8 +102,6 @@ if __name__=="__main__":
     parser.add_argument("--BATCH_SIZE", help="batch size",default=5, type=int)
 
     args = parser.parse_args()
-    input = os.path.abspath(args.indir)
-    #target = args.target
 
     #User setting parameters
     model_num = args.model_num
