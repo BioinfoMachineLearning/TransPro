@@ -134,8 +134,12 @@ if __name__=="__main__":
     if torch.cuda.is_available():
         cur_id = "cuda:" + str(torch.cuda.current_device())
         devices = [torch.cuda.current_device()]
+        print("You're using "+cur_id+"....")
+        print('Predicting......')
     else:
         cur_id = "cpu"
+        print("You're using "+cur_id+"....")
+        print("This may take longer....Please wait.....")
         devices = [-1]
 
     # TransPross parameters
@@ -213,3 +217,6 @@ if __name__=="__main__":
             if sym == "</s>": break
             pred_lst.append(out3_lst[i])
         print(sym)
+
+    os.system("rm "+src_dir+"/test.lst")
+    print("Done")
