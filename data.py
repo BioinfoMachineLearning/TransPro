@@ -15,6 +15,11 @@ from torch.autograd import Variable
 import operator,random
 from itertools import islice
 
+# GPUs to use
+if torch.cuda.is_available():
+    cur_id = "cuda:" + str(torch.cuda.current_device())
+else:
+    cur_id = "cpu"
 
 RawMSA = Sequence[Tuple[str, str]]
 proteinseq_toks = {
@@ -432,11 +437,11 @@ def greedy_decode(model, src, src_mask, max_len, start_symbol):
     memory = model.encode(src, src_mask)
     #ys = torch.ones(1, 1).fill_(start_symbol).type_as(src.data)
     ys1 = torch.ones(1, 1,dtype=torch.float32).fill_(start_symbol)
-    ys1 = ys1.to(device="cuda:0") 
+    ys1 = ys1.to(device=cur_id) 
     ys2 = torch.ones(1, 1,dtype=torch.float32).fill_(start_symbol)
-    ys2 = ys2.to(device="cuda:0") 
+    ys2 = ys2.to(device=cur_id) 
     ys3 = torch.ones(1, 1).fill_(start_symbol).type_as(src.data)
-    ys3 = ys3.to(device="cuda:0") 
+    ys3 = ys3.to(device=cur_id) 
     for i in range(max_len):
         out1,out2,out3 = model.decode(memory, src_mask, 
                            Variable(ys1), Variable(ys2),Variable(ys3),
@@ -459,11 +464,11 @@ def greedy_decode(model, src, src_mask, max_len, start_symbol):
 def greedy_decode2(model, src, src_mask, max_len, start_symbol):
     memory = model.encode(src, src_mask)
     ys1 = torch.ones(1, 1,dtype=torch.float32).fill_(start_symbol)
-    ys1 = ys1.to(device="cuda:0") 
+    ys1 = ys1.to(device=cur_id) 
     ys2 = torch.ones(1, 1,dtype=torch.float32).fill_(start_symbol)
-    ys2 = ys2.to(device="cuda:0") 
+    ys2 = ys2.to(device=cur_id) 
     ys3 = torch.ones(1, 1).fill_(start_symbol).type_as(src.data)
-    ys3 = ys3.to(device="cuda:0")
+    ys3 = ys3.to(device=cur_id)
     
     ys = []
     for i in range(max_len):
