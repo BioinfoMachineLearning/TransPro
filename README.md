@@ -48,9 +48,9 @@ data_dir: folder path for storing data
 dataset: training set name
 ```
 ## Inference
-```bash
 
 **Predict multiple targets in one time:**
+```bash
 python MSA_transformer2_predict_batch.py --data_dir <test> --dataset <casp13>
 
 If you want to predict multiple targets, you can create a test.lst file under the path /data_dir/dataset/test.lst in the format: <target_id> length
