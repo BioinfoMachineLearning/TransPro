@@ -16,9 +16,6 @@ from modules import *
 
 import numpy as np
 
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import accuracy_score
-
 # This is an efficient way to delete lowercase characters and insertion characters from a string
 deletekeys = dict.fromkeys(string.ascii_lowercase)
 deletekeys["."] = None
