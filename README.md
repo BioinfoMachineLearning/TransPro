@@ -34,8 +34,7 @@ All the required data for training are provided as below and avaiable at [![DOI]
 
 ## Testing data
 All the testing data for evaluation are provided as below:
-* CASP test set
-* CAMEO test set
+* CASP test sets(CASP13, CASP14)
 
 ## Training
 ```bash
@@ -48,7 +47,6 @@ BATCH_SIZE: batch size
 data_dir: folder path for storing data
 dataset: training set name
 ```
-
 ## Inference
 ```bash
 python MSA_transformer2_predict.py --data_dir <test> --dataset <CASP13>
