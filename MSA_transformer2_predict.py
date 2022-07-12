@@ -16,8 +16,7 @@ from modules import *
 
 import numpy as np
 
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import accuracy_score
+from itertools import islice
 
 # This is an efficient way to delete lowercase characters and insertion characters from a string
 deletekeys = dict.fromkeys(string.ascii_lowercase)
@@ -110,8 +109,10 @@ def get_lst(src_dir, a3m_file, lst):
     tar = os.path.splitext(base)[0]
     lst = src_dir+"/"+lst
     f = open(lst, "w")
-    infile = open(a3m_file, 'r')
-    seq = infile.readline().rstrip()
+
+    with open(a3m_file) as myfile:
+        head = list(islice(myfile, 2))
+    seq = head[-1].rstrip()
     f.write(tar+" "+str(len(seq)))
     f.close()
     return lst
@@ -130,7 +131,12 @@ if __name__=="__main__":
     a3m_file = os.path.abspath(args.input)
 
     # GPUs to use
-    devices = [0]
+    if torch.cuda.is_available():
+        cur_id = "cuda:" + str(torch.cuda.current_device())
+        devices = [torch.cuda.current_device()]
+    else:
+        cur_id = "cpu"
+        devices = [-1]
 
     # TransPross parameters
     pad_idx = 1
@@ -170,13 +176,16 @@ if __name__=="__main__":
         batch = rebatch(batch_orig, a3m_file, pad_idx,max_positions)
         src_mask = batch.src_mask
         src = batch.src
-        src = batch.src.to(device="cuda:0")
+        src = batch.src.to(device=cur_id)
         batch_size, n, seq_l = src.size()
-        src_mask = src_mask.to(device="cuda:0")
+        src_mask = src_mask.to(device=cur_id)
         
         for model_file in model_dir:
             if os.path.exists(model_file):
-                model = torch.load(model_file)
+                if torch.cuda.is_available():
+                    model = torch.load(model_file)
+                else:
+                    model = torch.load(model_file, map_location=torch.device('cpu'))
             else:
                 print(model_file+" doesn't exist, please download from https://doi.org/10.5281/zenodo.6762376")
                 sys.exit()
